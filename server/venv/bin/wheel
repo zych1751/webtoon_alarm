@@ -1,4 +1,4 @@
-#!/home/ubuntu/crawler/venv/bin/python3.5
+#!/home/ubuntu/webtoon_alarm/server/venv/bin/python2
 
 # -*- coding: utf-8 -*-
 import re

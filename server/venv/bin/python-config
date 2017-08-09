@@ -1,4 +1,4 @@
-#!/home/ubuntu/crawler/venv/bin/python
+#!/home/ubuntu/webtoon_alarm/server/venv/bin/python
 
 import sys
 import getopt
