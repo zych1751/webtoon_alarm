@@ -11,6 +11,9 @@ from tornado import gen
 CONFIG_FILE='./webtoon_info.json'
 CONFIG={}
 
+#issue
+#if webtoon_info.json is not exist, make new file with empty json
+
 def readConfig(filename):
     try:
         f = open(filename, 'r')
@@ -45,7 +48,9 @@ def crawl():
         url = default+day
         soup = BeautifulSoup(requests.get(url).text, 'lxml')
 
-        for link in soup.select('.img_list > li > dl > dt > a'):
+        for cur in soup.select('.img_list > li'):
+            img_link = cur.find('div').find('a').find('img').attrs['src']
+            link = cur.find('dl').find('dt').find('a')
             title = link.attrs['title']
             if (title in CONFIG['naver'][day]) == False:
                 CONFIG['naver'][day][title] = {}
@@ -60,6 +65,7 @@ def crawl():
                 CONFIG['naver'][day][title]['recent_title'] = recent_title
                 CONFIG['naver'][day][title]['recent_href'] = recent_href
                 CONFIG['naver'][day][title]['recent_time'] = cur_time
+                CONFIG['naver'][day][title]['img_link'] = img_link
                 change = True
 
         yield gen.Task(
