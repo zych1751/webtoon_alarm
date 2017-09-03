@@ -10,7 +10,7 @@ class Favorite : public Webtoon
 public:
     Favorite();
     Favorite(Webtoon webtoon);
-    Favorite(int company, int day, QString name, QString list_url, QString recent_url, QDate date, QTime time);
+    Favorite(int company, int day, QString name, QString list_url, QString recent_url, QString image_url, QDate date, QTime time);
     bool same(Webtoon webtoon);
 
     QDate getUpdateDate();

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>770</width>
-    <height>634</height>
+    <width>800</width>
+    <height>1000</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>4</x>
       <y>-1</y>
-      <width>791</width>
-      <height>621</height>
+      <width>800</width>
+      <height>1000</height>
      </rect>
     </property>
     <property name="currentIndex">
@@ -38,123 +38,207 @@
        <rect>
         <x>20</x>
         <y>0</y>
-        <width>741</width>
-        <height>571</height>
+        <width>771</width>
+        <height>921</height>
        </rect>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>6</number>
       </property>
       <widget class="QWidget" name="mon">
        <attribute name="title">
         <string>월</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget">
+       <widget class="QScrollArea" name="mon_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>741</width>
-          <height>521</height>
+          <width>761</width>
+          <height>881</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="mon_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="mon_scroll_layout">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>759</width>
+           <height>879</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="tue">
        <attribute name="title">
         <string>화</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_2">
+       <widget class="QScrollArea" name="tue_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>741</width>
-          <height>521</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="tue_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_2">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="wed">
        <attribute name="title">
         <string>수</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_3">
+       <widget class="QScrollArea" name="wed_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>731</width>
-          <height>521</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="wed_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_3">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="thu">
        <attribute name="title">
         <string>목</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_4">
+       <widget class="QScrollArea" name="thu_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>731</width>
-          <height>521</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="thu_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_4">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="fri">
        <attribute name="title">
         <string>금</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_5">
+       <widget class="QScrollArea" name="fri_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>741</width>
-          <height>521</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="fri_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_5">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="sat">
        <attribute name="title">
         <string>토</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_6">
+       <widget class="QScrollArea" name="sat_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>741</width>
-          <height>531</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="sat_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_6">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
       <widget class="QWidget" name="sun">
        <attribute name="title">
         <string>일</string>
        </attribute>
-       <widget class="QWidget" name="verticalLayoutWidget_7">
+       <widget class="QScrollArea" name="sun_scroll">
         <property name="geometry">
          <rect>
           <x>0</x>
           <y>0</y>
-          <width>741</width>
-          <height>521</height>
+          <width>771</width>
+          <height>891</height>
          </rect>
         </property>
-        <layout class="QVBoxLayout" name="sun_layout"/>
+        <property name="widgetResizable">
+         <bool>true</bool>
+        </property>
+        <widget class="QWidget" name="scrollAreaWidgetContents_7">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>0</y>
+           <width>769</width>
+           <height>889</height>
+          </rect>
+         </property>
+        </widget>
        </widget>
       </widget>
      </widget>
@@ -168,8 +252,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>761</width>
-        <height>541</height>
+        <width>791</width>
+        <height>911</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="fav_layout"/>
@@ -182,7 +266,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>770</width>
+     <width>800</width>
      <height>26</height>
     </rect>
    </property>

@@ -12,17 +12,19 @@ Favorite::Favorite(Webtoon webtoon)
     this->name = webtoon.getName();
     this->list_url = webtoon.getListUrl();
     this->recent_url = webtoon.getRecentUrl();
+    this->image_url = webtoon.getImageUrl();
     updateDate = QDate(2000, 1, 1);
     updateTime = QTime(0, 0, 0);
 }
 
-Favorite::Favorite(int company, int day, QString name, QString list_url, QString recent_url, QDate date, QTime time)
+Favorite::Favorite(int company, int day, QString name, QString list_url, QString recent_url, QString image_url, QDate date, QTime time)
 {
     this->company = company;
     this->day = day;
     this->name = name;
     this->list_url = QUrl(list_url);
     this->recent_url = QUrl(recent_url);
+    this->image_url = QUrl(image_url);
     updateDate = date;
     updateTime = time;
 }

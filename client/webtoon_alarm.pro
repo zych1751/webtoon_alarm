@@ -7,6 +7,7 @@
 QT += core gui
 QT += websockets
 QT -= gui
+QT += network
 
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -37,7 +38,8 @@ SOURCES += \
     webtoon.cpp \
     favorite.cpp \
     linkbutton.cpp \
-    favoritebutton.cpp
+    favoritebutton.cpp \
+    filedownloader.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -45,7 +47,8 @@ HEADERS += \
     webtoon.h \
     favorite.h \
     linkbutton.h \
-    favoritebutton.h
+    favoritebutton.h \
+    filedownloader.h
 
 FORMS += \
         mainwindow.ui

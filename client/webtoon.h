@@ -15,6 +15,8 @@ public:
     QString getName();
     QUrl getListUrl();
     QUrl getRecentUrl();
+    QUrl getImageUrl();
+    void setImageUrl(QUrl url);
 
 protected:
     int company; // 0 : naver, (maybe 1 : daum, 2 : lezhin)
@@ -22,6 +24,7 @@ protected:
     QString name;
     QUrl list_url;
     QUrl recent_url;
+    QUrl image_url;
 };
 
 #endif // WEBTOON_H

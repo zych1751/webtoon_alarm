@@ -54,3 +54,13 @@ QUrl Webtoon::getRecentUrl()
 {
     return recent_url;
 }
+
+QUrl Webtoon::getImageUrl()
+{
+    return image_url;
+}
+
+void Webtoon::setImageUrl(QUrl url)
+{
+    image_url = url;
+}

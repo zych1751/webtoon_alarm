@@ -57,7 +57,10 @@ void Client::onTextMessageReceived(QString message)
             auto cur = naver[day[i]].toObject();
 
             for(auto& it: cur.keys())
+            {
                 webtoon.push_back(Webtoon(0, i, it, QUrl(cur[it].toObject()["recent_href"].toString())));
+                webtoon.back().setImageUrl(QUrl(cur[it].toObject()["img_link"].toString()));
+            }
         }
 
         favoriteRead();
@@ -99,7 +102,7 @@ void Client::onTextMessageReceived(QString message)
 
 int Client::findFavorite(Webtoon& obj)
 {
-    for(int i = 0; i < favorite.size(); i++)
+    for(int i = 0; i < (int)favorite.size(); i++)
         if(favorite[i].same(obj))
             return i;
     return -1;
@@ -147,7 +150,7 @@ void Client::favoriteRead()
         {
             QString line = in.readLine();
             auto it = line.split('|');
-            favorite.push_back(Favorite(it[0].toInt(), it[1].toInt(), it[2], it[3], it[4], QDate::fromString(it[5]), QTime::fromString(it[6])));
+            favorite.push_back(Favorite(it[0].toInt(), it[1].toInt(), it[2], it[3], it[4], it[5], QDate::fromString(it[6]), QTime::fromString(it[7])));
         }
         emit changed();
         file.close();
@@ -165,7 +168,7 @@ void Client::favoriteWrite()
         for(auto& it: favorite)
         {
             QString cur = QString::number(it.getCompany()) + "|" + QString::number(it.getDay()) + "|" + it.getName() +
-                    "|" + it.getListUrl().toEncoded() + "|" + it.getRecentUrl().toEncoded() +
+                    "|" + it.getListUrl().toEncoded() + "|" + it.getRecentUrl().toEncoded() + "|" + it.getImageUrl().toEncoded() +
                     "|" + it.getUpdateDate().toString() + "|" + it.getUpdateTime().toString() + "\n";
             QByteArray line;
             line.append(cur);

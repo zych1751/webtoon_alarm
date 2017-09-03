@@ -7,6 +7,10 @@
 #include "linkbutton.h"
 #include "favoritebutton.h"
 #include <QSystemTrayIcon>
+#include "filedownloader.h"
+#include <QLayout>
+#include <QLabel>
+#include <QPixmap>
 
 namespace Ui {
 class MainWindow;
@@ -31,6 +35,12 @@ public slots:
     void webtoon_update();
     void favorite_update();
     void alarm(int update);
+
+private slots:
+    void loadImage(QPixmap* pixmap, FileDownloader* m_plmgCtr);
+
+signals:
+    void endLoading();
 };
 
 #endif // MAINWINDOW_H
