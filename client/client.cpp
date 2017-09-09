@@ -25,6 +25,11 @@ Client::Client(const QUrl &url, bool debug, QObject *parent):
     updated = 0;
 }
 
+void Client::closed()
+{
+    qDebug() << "closed";
+}
+
 void Client::onConnected()
 {
     if(m_debug)
@@ -58,8 +63,8 @@ void Client::onTextMessageReceived(QString message)
 
             for(auto& it: cur.keys())
             {
-                webtoon.push_back(Webtoon(0, i, it, QUrl(cur[it].toObject()["recent_href"].toString())));
-                webtoon.back().setImageUrl(QUrl(cur[it].toObject()["img_link"].toString()));
+                webtoon.push_back(new Webtoon(0, i, it, QUrl(cur[it].toObject()["recent_href"].toString())));
+                webtoon.back()->setImageUrl(QUrl(cur[it].toObject()["img_link"].toString()));
             }
         }
 
@@ -75,7 +80,7 @@ void Client::onTextMessageReceived(QString message)
 
             for(auto& it: cur.keys())
             {
-                Webtoon webtoon(0, i, it, QUrl(cur[it].toObject()["recent_href"].toString()));
+                Webtoon* webtoon = new Webtoon(0, i, it, QUrl(cur[it].toObject()["recent_href"].toString()));
                 int idx = findFavorite(webtoon);
                 if(idx == -1)   continue;
 
@@ -83,11 +88,12 @@ void Client::onTextMessageReceived(QString message)
                 QDate currentDate = QDate::fromString(time.split(' ')[0], "yyyy-MM-dd");
                 QTime currentTime = QTime::fromString(time.split(' ')[1].split('.')[0]);
 
-                if(favorite[idx].getUpdateDate() < currentDate || (favorite[idx].getUpdateDate() == currentDate && favorite[idx].getUpdateTime() < currentTime))
+                if(favorite[idx]->getUpdateDate() < currentDate || (favorite[idx]->getUpdateDate() == currentDate && favorite[idx]->getUpdateTime() < currentTime))
                 {
                     updated++;
-                    favorite[idx].setupdateDate(currentDate);
-                    favorite[idx].setupdateTime(currentTime);
+                    favorite[idx]->setupdateDate(currentDate);
+                    favorite[idx]->setupdateTime(currentTime);
+                    favorite[idx]->setReadFalse();
                 }
             }
         }
@@ -100,25 +106,33 @@ void Client::onTextMessageReceived(QString message)
     }
 }
 
-int Client::findFavorite(Webtoon& obj)
+int Client::findFavorite(Webtoon* obj)
 {
     for(int i = 0; i < (int)favorite.size(); i++)
-        if(favorite[i].same(obj))
+        if(favorite[i]->same(obj))
             return i;
     return -1;
 }
 
-void Client::addFavorite(Webtoon obj)
+int Client::findFavorite(Favorite* obj)
+{
+    for(int i = 0; i < (int)favorite.size(); i++)
+        if(favorite[i]->same(obj))
+            return i;
+    return -1;
+}
+
+void Client::addFavorite(Webtoon* obj)
 {
     int it = findFavorite(obj);
     if(it != -1)  return;
 
-    favorite.push_back(Favorite(obj));
+    favorite.push_back(new Favorite(obj));
     emit changed();
     favoriteWrite();
 }
 
-void Client::delFavorite(Webtoon obj)
+void Client::delFavorite(Webtoon* obj)
 {
     int it = findFavorite(obj);
     if(it == -1)  return;
@@ -128,12 +142,22 @@ void Client::delFavorite(Webtoon obj)
     favoriteWrite();
 }
 
-std::vector<Webtoon> Client::getWebtoon()
+void Client::delFavorite(Favorite *obj)
+{
+    int it = findFavorite(obj);
+    if(it == -1)  return;
+
+    favorite.erase(favorite.begin()+it);
+    emit changed();
+    favoriteWrite();
+}
+
+std::vector<Webtoon*> Client::getWebtoon()
 {
     return webtoon;
 }
 
-std::vector<Favorite> Client::getFavorite()
+std::vector<Favorite*> Client::getFavorite()
 {
     return favorite;
 }
@@ -150,7 +174,7 @@ void Client::favoriteRead()
         {
             QString line = in.readLine();
             auto it = line.split('|');
-            favorite.push_back(Favorite(it[0].toInt(), it[1].toInt(), it[2], it[3], it[4], it[5], QDate::fromString(it[6]), QTime::fromString(it[7])));
+            favorite.push_back(new Favorite(it[0].toInt(), it[1].toInt(), it[2], it[3], it[4], it[5], QDate::fromString(it[6]), QTime::fromString(it[7]), it[8].toInt()));
         }
         emit changed();
         file.close();
@@ -165,14 +189,25 @@ void Client::favoriteWrite()
     {
         file.resize(0);
 
-        for(auto& it: favorite)
+        for(auto it: favorite)
         {
-            QString cur = QString::number(it.getCompany()) + "|" + QString::number(it.getDay()) + "|" + it.getName() +
-                    "|" + it.getListUrl().toEncoded() + "|" + it.getRecentUrl().toEncoded() + "|" + it.getImageUrl().toEncoded() +
-                    "|" + it.getUpdateDate().toString() + "|" + it.getUpdateTime().toString() + "\n";
+            int bool_val;
+            if(it->getRead())	bool_val = 1;
+            else	bool_val = 0;
+
+            QString cur = QString::number(it->getCompany()) + "|" + QString::number(it->getDay()) + "|" + it->getName() +
+                    "|" + it->getListUrl().toEncoded() + "|" + it->getRecentUrl().toEncoded() + "|" + it->getImageUrl().toEncoded() +
+                    "|" + it->getUpdateDate().toString() + "|" + it->getUpdateTime().toString() + "|" + QString::number(bool_val) + "\n";
             QByteArray line;
             line.append(cur);
             file.write(line);
         }
     }
+}
+
+void Client::refresh()
+{
+    for(auto it: favorite)
+        it->setReadTrue();
+    favoriteWrite();
 }

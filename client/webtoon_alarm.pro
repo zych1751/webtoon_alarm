@@ -17,6 +17,7 @@ TEMPLATE = app
 
 CONFIG += console
 CONFIG -= app_bundle
+CONFIG += c++11
 
 
 # The following define makes your compiler emit warnings if you use
@@ -39,7 +40,8 @@ SOURCES += \
     favorite.cpp \
     linkbutton.cpp \
     favoritebutton.cpp \
-    filedownloader.cpp
+    filedownloader.cpp \
+    favoritedeletebutton.cpp
 
 HEADERS += \
         mainwindow.h \
@@ -48,7 +50,8 @@ HEADERS += \
     favorite.h \
     linkbutton.h \
     favoritebutton.h \
-    filedownloader.h
+    filedownloader.h \
+    favoritedeletebutton.h
 
 FORMS += \
         mainwindow.ui

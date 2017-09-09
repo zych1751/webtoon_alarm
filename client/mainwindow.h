@@ -11,6 +11,7 @@
 #include <QLayout>
 #include <QLabel>
 #include <QPixmap>
+#include <QCloseEvent>
 
 namespace Ui {
 class MainWindow;
@@ -30,14 +31,20 @@ private:
     bool initialized;
     std::vector<LinkButton*> webtoon_list[3][7]; // company, day
     QSystemTrayIcon* tray;
+    std::vector<QVBoxLayout*> favorite_list;
+
+    void closeEvent(QCloseEvent* event);
+    void create_tray_icon();
 
 public slots:
     void webtoon_update();
     void favorite_update();
     void alarm(int update);
+    void refresh();
 
 private slots:
     void loadImage(QPixmap* pixmap, FileDownloader* m_plmgCtr);
+    void on_show_hide(QSystemTrayIcon::ActivationReason reason);
 
 signals:
     void endLoading();

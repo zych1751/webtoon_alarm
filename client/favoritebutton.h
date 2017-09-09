@@ -9,7 +9,7 @@ class FavoriteButton: public QPushButton
 {
     Q_OBJECT
 public:
-    FavoriteButton(QWidget *parent, Client* client, Webtoon _webtoon);
+    FavoriteButton(QWidget *parent, Client* client, Webtoon* _webtoon);
 
 signals:
     void add();
@@ -20,7 +20,7 @@ public slots:
 
 private:
     bool select;
-    Webtoon webtoon;
+    Webtoon* webtoon;
 };
 
 #endif // FAVORITEBUTTON_H

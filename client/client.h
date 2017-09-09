@@ -17,30 +17,31 @@ class Client: public QObject
 {
     Q_OBJECT
 public:
-    explicit Client(const QUrl &url, bool debug=false, QObject *parent=Q_NULLPTR);
-    std::vector<Webtoon> getWebtoon();
-    std::vector<Favorite> getFavorite();
-    int findFavorite(Webtoon& obj); // return idx
+    Client(const QUrl &url, bool debug=false, QObject *parent=Q_NULLPTR);
+    std::vector<Webtoon*> getWebtoon();
+    std::vector<Favorite*> getFavorite();
+    int findFavorite(Webtoon* obj); // return idx
+    int findFavorite(Favorite* obj); // return idx
+    void refresh();
 
 signals:
     void initialized();
     void changed();
     void favoriteUpdated(int num);
 
-Q_SIGNALS:
-    void closed();
-
 public Q_SLOTS:
-    void addFavorite(Webtoon obj);
-    void delFavorite(Webtoon obj);
+    void addFavorite(Webtoon* obj);
+    void delFavorite(Webtoon* obj);
+    void delFavorite(Favorite* fav);
 
 private Q_SLOTS:
     void onConnected();
     void onTextMessageReceived(QString message);
+    void closed();
 
 private:
-    std::vector<Webtoon> webtoon;
-    std::vector<Favorite> favorite;
+    std::vector<Webtoon*> webtoon;
+    std::vector<Favorite*> favorite;
     QWebSocket m_webSocket;
     QUrl m_url;
     bool m_debug;

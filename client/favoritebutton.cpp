@@ -1,7 +1,7 @@
 #include "favoritebutton.h"
 #include <QSignalMapper>
 
-FavoriteButton::FavoriteButton(QWidget *parent, Client *client, Webtoon _webtoon):
+FavoriteButton::FavoriteButton(QWidget *parent, Client *client, Webtoon* _webtoon) :
     QPushButton(parent)
 {
     select = false;

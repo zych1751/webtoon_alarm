@@ -11,11 +11,6 @@ FileDownloader::FileDownloader(QUrl imageUrl, QPixmap *pixmap, QObject* parent) 
     m_WebCtrl.get(request);
 }
 
-FileDownloader::~FileDownloader()
-{
-
-}
-
 void FileDownloader::fileDownloaded(QNetworkReply* pReply)
 {
     m_DownloadedData = pReply->readAll();
